@@ -1,64 +1,64 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="hero-block">
-    <span class="hero-chip">your local marketplace</span>
-    <h1>Find anything,<br><span>list everything.</span></h1>
-    <p>Trusted classifieds for rentals, jobs, services, and more — right in your neighborhood.</p>
+<section class="card hero">
+    <h1>Discover trusted local services & classifieds</h1>
+    <p class="muted">Explore colorful categories, featured offers, and nearby opportunities.</p>
 
-    <form method="get" class="search-row">
+    <div class="grid grid-3" style="margin-top:1rem;">
+        <div class="card"><div class="kpi">{{ total_listings }}</div><div class="muted">Total listings</div></div>
+        <div class="card"><div class="kpi">{{ featured_count }}</div><div class="muted">Featured listings</div></div>
+        <div class="card"><div class="kpi">{{ listings|length }}</div><div class="muted">Results shown</div></div>
+    </div>
+
+    <form method="get" class="filters">
+        <input type="text" name="q" placeholder="What are you looking for?" value="{{ filters.q }}">
+
         <select name="category">
             <option value="">All categories</option>
             {% for key, label in category_choices %}
-                <option value="{{ key }}" {% if filters.category == key %}selected{% endif %}>{{ label }}</option>
+                <option value="{{ key }}" {% if filters.category == key %}selected{% endif %}>
+                    {{ label }}
+                </option>
             {% endfor %}
         </select>
-        <input type="text" name="city" value="{{ filters.city }}" placeholder="Irving, TX">
+
+        <input type="text" name="city" placeholder="City" value="{{ filters.city }}">
+
+        <select name="sort">
+            <option value="latest" {% if filters.sort == 'latest' %}selected{% endif %}>Latest</option>
+            <option value="price_low" {% if filters.sort == 'price_low' %}selected{% endif %}>Price: Low to High</option>
+            <option value="price_high" {% if filters.sort == 'price_high' %}selected{% endif %}>Price: High to Low</option>
+        </select>
+
         <button type="submit">Search</button>
     </form>
-
-    <div class="kpis">
-        <div><strong>{{ total_listings }}</strong><span>Active listings</span></div>
-        <div><strong>{{ listings|length }}</strong><span>Results now</span></div>
-        <div><strong>{{ category_choices|length }}</strong><span>Categories</span></div>
-    </div>
 </section>
 
-<section class="category-strip">
-    <h3>BROWSE BY CATEGORY</h3>
-    <div class="chips">
-        {% for key, label in category_choices %}
-            <a class="chip" href="?category={{ key }}">● {{ label }}</a>
-        {% endfor %}
-    </div>
-</section>
+<div class="chips" style="margin-bottom:1rem;">
+    {% for key, label in category_choices %}
+        <a class="chip" href="?category={{ key }}">{{ label }}</a>
+    {% endfor %}
+</div>
 
-<section class="featured-wrap">
-    <div class="featured-head">
-        <h2>Featured listings</h2>
-        <form method="get"><select name="sort"><option value="latest">Latest first</option><option value="price_low">Price low-high</option><option value="price_high">Price high-low</option></select></form>
-    </div>
-    <div class="cards3">
-        {% for listing in listings|slice:':3' %}
-            <article class="listing-card">
-                {% if listing.image %}<img class="listing-thumb" src="{{ listing.image.url }}" alt="{{ listing.title }}">{% else %}<div class="listing-thumb"></div>{% endif %}
-                <div class="card-body">
-                    <div class="badges"><span>{{ listing.get_category_display }}</span>{% if listing.featured %}<span class="gold">Featured</span>{% endif %}</div>
-                    <h4>{{ listing.title }}</h4>
-                    <p class="price">{% if listing.price %}${{ listing.price }}{% else %}Contact for price{% endif %}</p>
-                    <p class="muted">📍 {{ listing.city }}, {{ listing.state }}</p>
-                    <a href="{% url 'listing_detail' listing.pk %}">View listing</a>
-                </div>
-            </article>
-        {% empty %}
-            <p>No listings yet.</p>
-        {% endfor %}
-    </div>
-</section>
-
-<section class="benefits">
-    <div><h4>Post in 60 seconds</h4><p>Create a listing fast with smart auto-fill and photo upload.</p></div>
-    <div><h4>Hyperlocal search</h4><p>Results filtered to your city and neighborhood.</p></div>
-    <div><h4>Safe messaging</h4><p>Chat with sellers without sharing contact details.</p></div>
-    <div><h4>Verified sellers</h4><p>Profiles you can trust before you buy.</p></div>
+<section class="grid grid-listings">
+{% for listing in listings %}
+    <article class="card">
+        {% if listing.image %}
+            <img class="listing-thumb" src="{{ listing.image.url }}" alt="{{ listing.title }}">
+        {% else %}
+            <div class="listing-thumb"></div>
+        {% endif %}
+        <div class="row" style="margin-top:.7rem;">
+            <span class="chip">{{ listing.get_category_display }}</span>
+            {% if listing.featured %}<span class="chip">Featured</span>{% endif %}
+        </div>
+        <h3><a href="{% url 'listing_detail' listing.pk %}">{{ listing.title }}</a></h3>
+        <p class="price">{% if listing.price %}${{ listing.price }}{% else %}Contact for price{% endif %}</p>
+        <p class="muted">{{ listing.city }}, {{ listing.state }} {{ listing.country }}</p>
+        <p>{{ listing.description|truncatewords:22 }}</p>
+    </article>
+{% empty %}
+    <p>No listings found. Try different filters.</p>
+{% endfor %}
 </section>
 {% endblock %}

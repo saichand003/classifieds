@@ -35,6 +35,9 @@ body { font-family: Inter, Arial, sans-serif; background: var(--bg); color: var(
 .wordmark-dark { color:#232323; }
 .wordmark-blue { color:#1d5fa8; }
 .tagline { margin-top:.45rem; font-size:.74rem; letter-spacing:.14em; color:#838383; font-weight:700; }
+.dark .wordmark-dark { color:#e5e7eb; }
+.dark .tagline { color:#cbd5e1; }
+
 .primary-links, .nav-links { display:flex; gap:.8rem; flex-wrap:wrap; align-items:center; }
 .primary-links a, .nav-links a { text-decoration:none; color:var(--text); font-weight:600; }
 .button, button {

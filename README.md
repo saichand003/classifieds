@@ -103,3 +103,31 @@ Then in browser:
 3. Confirm footer shows the latest `UI version` value.
 
 If still stale, stop server and restart it from the same terminal where `.venv` is active.
+
+
+## Test on your phone
+
+### Option 1: Same Wi-Fi (fastest)
+1. Connect laptop and phone to the same Wi-Fi.
+2. Start Django on all interfaces:
+   ```bash
+   source .venv/bin/activate
+   python manage.py runserver 0.0.0.0:8000
+   ```
+3. Find your laptop IP (macOS):
+   ```bash
+   ipconfig getifaddr en0
+   ```
+4. On phone browser open:
+   ```
+   http://<YOUR_LAPTOP_IP>:8000
+   ```
+
+If host validation blocks access, set env var before running:
+```bash
+export DJANGO_ALLOWED_HOSTS='127.0.0.1,localhost,<YOUR_LAPTOP_IP>'
+python manage.py runserver 0.0.0.0:8000
+```
+
+### Option 2: Public tunnel (works outside Wi-Fi)
+Use Cloudflare Tunnel or ngrok to expose local port 8000 securely for temporary testing.

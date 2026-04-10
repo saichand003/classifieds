@@ -1,6 +1,8 @@
-# CityConnect (Rich UI Marketplace MVP)
+# Listojo (Rich UI Marketplace MVP)
 
 A Django + SQLite marketplace app inspired by local discovery apps like Sulekha.
+
+Brand/domain: **listojo.com**
 
 ## Rich UI features included
 

@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CityConnect Classifieds</title>
+    <title>Listojo Classifieds</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}?v={{ UI_ASSET_VERSION }}">
 </head>
 <body>
 <div class="container">
     <nav class="navbar">
         <div class="nav-links">
-            <a class="brand" href="{% url 'listing_list' %}">CityConnect</a>
+            <a class="brand" href="{% url 'listing_list' %}">Listojo</a>
             <a href="{% url 'create_listing' %}">Post Ad</a>
             <a href="{% url 'inbox' %}">Messages</a>
         </div>

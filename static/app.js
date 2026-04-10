@@ -1,5 +1,5 @@
 (function () {
-  const key = 'cityconnect-theme';
+  const key = 'listojo-theme';
   const root = document.documentElement;
   const saved = localStorage.getItem(key);
   if (saved === 'dark') root.classList.add('dark');

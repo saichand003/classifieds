@@ -79,3 +79,8 @@ This validates Python syntax by byte-compiling all project files.
 find . -type d -name "__pycache__" -prune -exec rm -rf {} +
 python manage.py runserver
 ```
+
+
+## Security
+
+See `SECURITY.md` for production hardening, encryption, and intrusion-resistance checklist.

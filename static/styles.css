@@ -34,7 +34,7 @@ body { font-family: Inter, Arial, sans-serif; background: var(--bg); color: var(
 .wordmark { font-family: Georgia, 'Times New Roman', serif; font-size: 3.1rem; font-weight: 700; }
 .wordmark-dark { color:#232323; }
 .wordmark-blue { color:#1d5fa8; }
-.tagline { margin-top:.15rem; font-size:.74rem; letter-spacing:.14em; color:#838383; font-weight:700; }
+.tagline { margin-top:.45rem; font-size:.74rem; letter-spacing:.14em; color:#838383; font-weight:700; }
 .primary-links, .nav-links { display:flex; gap:.8rem; flex-wrap:wrap; align-items:center; }
 .primary-links a, .nav-links a { text-decoration:none; color:var(--text); font-weight:600; }
 .button, button {
@@ -63,5 +63,5 @@ footer { text-align:center; padding-bottom:.8rem; }
   .filters { grid-template-columns: 1fr; }
   .logo-mark { height: 48px; }
   .wordmark { font-size: 2rem; }
-  .tagline { font-size: .62rem; letter-spacing: .1em; }
+  .tagline { margin-top: .32rem; font-size: .62rem; letter-spacing: .1em; }
   }

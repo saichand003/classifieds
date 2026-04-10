@@ -64,3 +64,16 @@ make compile
 ```
 
 This validates Python syntax by byte-compiling all project files.
+
+
+## If you still see the old UI
+
+1. Stop and restart the dev server.
+2. Hard refresh your browser (`Cmd+Shift+R` on macOS).
+3. Verify the footer shows `UI version: 2026-04-10-1`.
+4. If needed, clear cached static files and restart:
+
+```bash
+find . -type d -name "__pycache__" -prune -exec rm -rf {} +
+python manage.py runserver
+```

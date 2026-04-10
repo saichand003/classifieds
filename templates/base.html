@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CityConnect Classifieds</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}?v={{ UI_ASSET_VERSION }}">
 </head>
 <body>
 <div class="container">
@@ -40,6 +40,7 @@
 
     {% block content %}{% endblock %}
 </div>
-<script src="{% static 'app.js' %}"></script>
+<footer class="muted" style="margin-top:1rem;font-size:.85rem;">UI version: {{ UI_ASSET_VERSION }}</footer>
+<script src="{% static 'app.js' %}?v={{ UI_ASSET_VERSION }}"></script>
 </body>
 </html>

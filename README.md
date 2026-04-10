@@ -28,7 +28,7 @@ A classifieds/listing web app built with Django and SQLite.
    python -m pip install -r requirements.txt
    ```
 
-3. Run migrations:
+3. Run migrations (required before first page load):
    ```bash
    python manage.py migrate
    ```
@@ -95,3 +95,11 @@ If you want to start fresh:
 rm -f db.sqlite3
 python manage.py migrate
 ```
+
+
+### `OperationalError: no such table: listings_listing`
+Your database schema is not initialized yet. Run:
+```bash
+python manage.py migrate
+```
+Then reload the page.

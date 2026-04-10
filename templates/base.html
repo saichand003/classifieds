@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listojo Classifieds</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}?v={{ UI_ASSET_VERSION }}">
+</head>
+<body>
+<div class="page-shell">
+<header class="topbar">
+    <div class="topbar-inner">
+        <a class="brand" href="{% url 'listing_list' %}">
+            <img src="{% static 'mark.svg' %}?v={{ UI_ASSET_VERSION }}" alt="Listojo mark" class="logo-mark">
+            <span class="wordmark-wrap">
+                <span class="wordmark"><span class="wordmark-dark">list</span><span class="wordmark-blue">ojo</span></span>
+                <span class="tagline">FIND · LIST · DISCOVER</span>
+            </span>
+        </a>
+        <nav class="main-nav">
+            <a href="{% url 'create_listing' %}">Post Ad</a>
+            <a href="{% url 'listing_list' %}">Browse</a>
+            <a href="{% url 'inbox' %}">Messages</a>
+        </nav>
+        <div class="auth-nav">
+            {% if user.is_authenticated %}
+                <a class="pill-btn" href="{% url 'profile' %}">Profile</a>
+                <form method="post" action="{% url 'logout' %}" style="display:inline;">{% csrf_token %}<button type="submit" class="pill-btn">Log out</button></form>
+            {% else %}
+                <a class="pill-btn" href="{% url 'login' %}">Log in</a>
+                <a class="pill-btn strong" href="{% url 'register' %}">Register</a>
+            {% endif %}
+            <button class="icon-btn" type="button">···</button>
+        </div>
+    </div>
+</header>
+
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<footer class="site-footer">© 2026 Listojo. All rights reserved.</footer>
+</div>
+<script src="{% static 'app.js' %}?v={{ UI_ASSET_VERSION }}"></script>
+</body>
+</html>

@@ -28,8 +28,13 @@ body { font-family: Inter, Arial, sans-serif; background: var(--bg); color: var(
   background: var(--surface); border:1px solid var(--border); padding:.75rem 1rem; border-radius:14px;
 }
 .nav-left { display:flex; align-items:center; gap:1.1rem; flex-wrap:wrap; }
-.brand { display:flex; align-items:center; text-decoration:none; }
-.logo { height: 68px; width: auto; display:block; }
+.brand { display:flex; align-items:center; gap:.7rem; text-decoration:none; }
+.logo-mark { height: 62px; width: auto; display:block; }
+.wordmark-wrap { display:flex; flex-direction:column; line-height:1; }
+.wordmark { font-family: Georgia, 'Times New Roman', serif; font-size: 3.1rem; font-weight: 700; }
+.wordmark-dark { color:#232323; }
+.wordmark-blue { color:#1d5fa8; }
+.tagline { margin-top:.15rem; font-size:.74rem; letter-spacing:.14em; color:#838383; font-weight:700; }
 .primary-links, .nav-links { display:flex; gap:.8rem; flex-wrap:wrap; align-items:center; }
 .primary-links a, .nav-links a { text-decoration:none; color:var(--text); font-weight:600; }
 .button, button {
@@ -56,5 +61,7 @@ input, select, textarea { width:100%; padding:.65rem .7rem; border-radius:10px; 
 footer { text-align:center; padding-bottom:.8rem; }
 @media (max-width: 860px) {
   .filters { grid-template-columns: 1fr; }
-  .logo { height: 56px; }
+  .logo-mark { height: 48px; }
+  .wordmark { font-size: 2rem; }
+  .tagline { font-size: .62rem; letter-spacing: .1em; }
   }

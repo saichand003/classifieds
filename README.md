@@ -84,3 +84,22 @@ python manage.py runserver
 ## Security
 
 See `SECURITY.md` for production hardening, encryption, and intrusion-resistance checklist.
+
+
+## If you don't see latest changes in browser
+
+Yes — after pulling new code you usually need to do a quick refresh workflow:
+
+```bash
+git pull
+source .venv/bin/activate
+python manage.py migrate
+python manage.py runserver
+```
+
+Then in browser:
+1. Hard refresh (`Cmd+Shift+R` on macOS / `Ctrl+F5` on Windows).
+2. Open DevTools → Network → check **Disable cache** and reload once.
+3. Confirm footer shows the latest `UI version` value.
+
+If still stale, stop server and restart it from the same terminal where `.venv` is active.

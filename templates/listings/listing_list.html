@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+    <h1>Find local services, rentals, jobs, and more</h1>
+    <p class="muted">Marketplace-style discovery inspired by community classifieds platforms.</p>
+    <form method="get" style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:0.5rem;">
+        <input type="text" name="q" placeholder="What are you looking for?" value="{{ filters.q }}">
+        <select name="category">
+            <option value="">All categories</option>
+            {% for key, label in category_choices %}
+                <option value="{{ key }}" {% if filters.category == key %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="city" placeholder="City" value="{{ filters.city }}">
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+{% for listing in listings %}
+    <article class="card {% if listing.featured %}featured{% endif %}">
+        <h2><a href="{% url 'listing_detail' listing.pk %}">{{ listing.title }}</a></h2>
+        <p>
+            <span class="badge">{{ listing.get_category_display }}</span>
+            {% if listing.featured %}<span class="badge">Featured</span>{% endif %}
+        </p>
+        <p><strong>{% if listing.price %}${{ listing.price }}{% else %}Contact for price{% endif %}</strong></p>
+        <p class="muted">{{ listing.city }}, {{ listing.state }} {{ listing.country }} · posted by {{ listing.owner.username }}</p>
+        <p>{{ listing.description|truncatewords:25 }}</p>
+    </article>
+{% empty %}
+    <p>No listings found. Try different filters.</p>
+{% endfor %}
+{% endblock %}

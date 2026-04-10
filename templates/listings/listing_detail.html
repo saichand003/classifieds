@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<article class="card">
+    <h1>{{ listing.title }}</h1>
+    <p>
+        <span class="badge">{{ listing.get_category_display }}</span>
+        {% if listing.featured %}<span class="badge">Featured</span>{% endif %}
+    </p>
+    <p><strong>{% if listing.price %}${{ listing.price }}{% else %}Contact for price{% endif %}</strong></p>
+    <p>{{ listing.description }}</p>
+    {% if listing.image %}
+        <img src="{{ listing.image.url }}" alt="{{ listing.title }}">
+    {% endif %}
+    <p class="muted">Location: {{ listing.city }}, {{ listing.state }} {{ listing.country }}</p>
+    {% if listing.contact_phone %}<p>Phone: {{ listing.contact_phone }}</p>{% endif %}
+    <p>Owner: {{ listing.owner.username }}</p>
+</article>
+
+{% if user.is_authenticated and user != listing.owner %}
+    <p><a href="{% url 'conversation' listing.owner.id %}">Chat with poster</a></p>
+{% endif %}
+
+<section class="card">
+    <h2>Send inquiry</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ inquiry_form.as_p }}
+        <button type="submit">Send inquiry</button>
+    </form>
+</section>
+{% endblock %}

@@ -11,21 +11,21 @@ A classifieds/listing web app built with Django and SQLite.
 
 ## Requirements
 
-- Python 3.10+ (3.11 recommended)
-- `pip`
+- Python 3.10+ (3.11+ recommended)
+- `pip` (invoked via `python -m pip`)
 
 ## Quick start (local machine)
 
 1. Create and activate a virtual environment:
    ```bash
-   python -m venv .venv
+   python3 -m venv .venv
    source .venv/bin/activate
    ```
 
 2. Install dependencies:
    ```bash
    python -m pip install --upgrade pip
-   pip install -r requirements.txt
+   python -m pip install -r requirements.txt
    ```
 
 3. Run migrations:
@@ -45,6 +45,33 @@ A classifieds/listing web app built with Django and SQLite.
 
 6. Open: http://127.0.0.1:8000/
 
+## One-command boot (Linux/macOS)
+
+```bash
+./run_local.sh
+```
+
+This script auto-detects `python3` (or `python`), creates `.venv`, installs dependencies, runs migrations, and starts the server.
+
+## Homebrew macOS notes
+
+If you see `zsh: command not found: pip`, use Python's module form instead of `pip` directly:
+
+```bash
+python3 -m pip --version
+python3 -m pip install -r requirements.txt
+```
+
+If `python3` itself is not on your `PATH`, add Homebrew Python `libexec/bin` symlinks to your shell config:
+
+```bash
+echo 'export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+python3 --version
+```
+
+`pipx` is not a replacement for `pip install -r requirements.txt`; `pipx` installs standalone CLI apps, not project dependencies.
+
 ## Default app routes
 
 - `/` — listings homepage
@@ -57,7 +84,7 @@ A classifieds/listing web app built with Django and SQLite.
 ## Troubleshooting
 
 ### `ModuleNotFoundError: No module named 'django'`
-You are likely outside your virtual environment or dependencies were not installed.
+You're likely outside your virtual environment or dependencies were not installed in the venv.
 
 ### Image upload errors
 Make sure Pillow installed successfully and forms use `enctype="multipart/form-data"` (already configured in templates).

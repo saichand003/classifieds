@@ -103,3 +103,11 @@ Your database schema is not initialized yet. Run:
 python manage.py migrate
 ```
 Then reload the page.
+
+
+If you still see this error after migrating, verify you're running commands in the same project directory and virtual environment used by `runserver`:
+```bash
+which python
+python manage.py showmigrations listings chatapp
+python manage.py migrate
+```

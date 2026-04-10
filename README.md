@@ -1,20 +1,25 @@
-# CityConnect (Sulekha-style Classifieds MVP)
+# CityConnect (Rich UI Marketplace MVP)
 
-A Django + SQLite marketplace app inspired by local community discovery platforms (services, rentals, jobs, buy/sell, and events).
+A Django + SQLite marketplace app inspired by local discovery apps like Sulekha.
 
-## Current MVP features
+## Rich UI features included
+
+- Modern card-based responsive layout.
+- Homepage hero with KPI counters.
+- Multi-filter search (keyword, category, city, sort).
+- Category chips for quick exploration.
+- Listing cards with image thumbnails and featured badges.
+- Improved detail page layout (content + inquiry sidebar).
+- Dark mode toggle with local preference persistence.
+- Toast-style success messages.
+
+## Product features
 
 - User registration/login/logout.
-- Post listings with category, city/state/country, phone, optional image, optional price.
+- Post listings with category, location, contact phone, optional image and optional price.
 - Featured listings.
-- Search + filters by query/category/city on homepage.
-- Listing detail page with inquiry form (lead capture).
+- Inquiry form on listing detail.
 - Direct user-to-user chat.
-
-## Requirements
-
-- Python 3.10+ (3.11+ recommended)
-- pip (use `python -m pip`)
 
 ## Run locally
 
@@ -27,25 +32,17 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Or use:
+Or:
 
 ```bash
 ./run_local.sh
 ```
 
-## Core routes
+## Routes
 
-- `/` Marketplace homepage (search/filter listings)
-- `/post/` Post a new listing
-- `/listing/<id>/` Listing details + inquiry form
+- `/` Marketplace homepage
+- `/post/` Create listing
+- `/listing/<id>/` Listing detail + inquiry
 - `/chat/` Chat inbox
-- `/accounts/register/` Registration
+- `/accounts/register/` Register
 - `/accounts/login/` Login
-
-## Next steps to get even closer to Sulekha
-
-- Add service providers business profiles and ratings.
-- Add paid promotions + ad packages.
-- Add saved searches and email alerts.
-- Add geolocation, map results, and nearby sorting.
-- Add moderation workflows and abuse reporting.

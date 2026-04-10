@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from django.db.utils import OperationalError
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ListingForm, ListingInquiryForm
@@ -28,6 +29,7 @@ def listing_list(request):
     q = request.GET.get('q', '').strip()
     category = request.GET.get('category', '').strip()
     city = request.GET.get('city', '').strip()
+    sort = request.GET.get('sort', 'latest').strip()
 
     if q:
         listings = listings.filter(title__icontains=q)
@@ -36,10 +38,22 @@ def listing_list(request):
     if city:
         listings = listings.filter(city__icontains=city)
 
+    if sort == 'price_low':
+        listings = listings.order_by('price', '-featured', '-created_at')
+    elif sort == 'price_high':
+        listings = listings.order_by('-price', '-featured', '-created_at')
+
+    category_counts = dict(
+        Listing.objects.values_list('category').annotate(total=Count('id'))
+    )
+
     context = {
         'listings': list(listings),
         'category_choices': Listing.CATEGORY_CHOICES,
-        'filters': {'q': q, 'category': category, 'city': city},
+        'category_counts': category_counts,
+        'total_listings': Listing.objects.count(),
+        'featured_count': Listing.objects.filter(featured=True).count(),
+        'filters': {'q': q, 'category': category, 'city': city, 'sort': sort},
     }
     return render(request, 'listings/listing_list.html', context)
 

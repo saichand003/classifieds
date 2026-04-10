@@ -46,3 +46,21 @@ Or:
 - `/chat/` Chat inbox
 - `/accounts/register/` Register
 - `/accounts/login/` Login
+
+
+## How to compile the latest code
+
+Use one of the following:
+
+### Option A: direct command
+```bash
+source .venv/bin/activate
+python -m compileall .
+```
+
+### Option B: Makefile shortcut
+```bash
+make compile
+```
+
+This validates Python syntax by byte-compiling all project files.

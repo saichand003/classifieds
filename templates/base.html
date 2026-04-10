@@ -10,10 +10,15 @@
 <body>
 <div class="container">
     <nav class="navbar">
-        <div class="nav-links">
-            <a class="brand" href="{% url 'listing_list' %}"><img src="{% static 'logo.svg' %}?v={{ UI_ASSET_VERSION }}" alt="Listojo" class="logo"></a>
-            <a href="{% url 'create_listing' %}">Post Ad</a>
-            <a href="{% url 'inbox' %}">Messages</a>
+        <div class="nav-left">
+            <a class="brand" href="{% url 'listing_list' %}">
+                <img src="{% static 'logo.svg' %}?v={{ UI_ASSET_VERSION }}" alt="Listojo" class="logo">
+                <span class="logo-caption">FIND · LIST · DISCOVER</span>
+            </a>
+            <div class="primary-links">
+                <a href="{% url 'create_listing' %}">Post Ad</a>
+                <a href="{% url 'inbox' %}">Messages</a>
+            </div>
         </div>
         <div class="nav-links">
             <button type="button" class="button secondary" data-theme-toggle>🌓 Theme</button>

@@ -26,6 +26,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'classifieds_project.middleware.DatabaseNotReadyMiddleware',
 ]
 
 ROOT_URLCONF = 'classifieds_project.urls'
